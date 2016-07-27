@@ -7,10 +7,10 @@ module.exports = {
   entry: './entry.js',
   output: {
     path: './dist',
-    filename: '[name].js'
+    filename: '[name].[chunkhash].js'
   },
   plugins: [
-    new ExtractTextPlugin('style.css', {
+    new ExtractTextPlugin('[name].[chunkhash].css', {
       disable: false,
       allChunks: true,
     }),
@@ -21,6 +21,16 @@ module.exports = {
         filename: '../index.html',
         minify: false,
         favicon: false,
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      }
     })
   ],
   module: {
