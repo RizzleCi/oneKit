@@ -21,9 +21,10 @@ class Root extends React.Component {
     )
   }
   handleClick(){
-  	const {addName} = this.props.actions
+  	const {addName, fetchData} = this.props.actions
   	let name = this.nameInput.value
   	addName(name)
+    fetchData(name)
   	console.log(this.props.state)
   }
 }

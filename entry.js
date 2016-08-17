@@ -8,15 +8,10 @@ import reducer from './src/reducers'
 import Root from './src/pages/root'
 
 
-// function configureStore(initialState) {
-//   let store = createStore(reducer, initialState, compose(
-// 	  applyMiddleware(thunk),
-// 	  window.devToolsExtension ? window.devToolsExtension() : f => f
-// 	))
-//   return store
-// }
-// const store = configureStore
-let store = createStore(reducer, window.devToolsExtension && window.devToolsExtension())
+let store = createStore(reducer, compose(
+  applyMiddleware(thunk),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 render(
 	<Provider store={store}>
     <Root />

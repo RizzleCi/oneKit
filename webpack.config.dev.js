@@ -4,10 +4,13 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './entry.js',
+  entry: {
+    app: ['webpack-hot-middleware/client','./entry.js']
+  },
   output: {
     path: './dist',
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/dist/'
   },
   plugins: [
     new ExtractTextPlugin('style.css', {
@@ -21,7 +24,8 @@ module.exports = {
         filename: '../index.html',
         minify: false,
         favicon: false,
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [
