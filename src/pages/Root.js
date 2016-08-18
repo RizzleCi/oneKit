@@ -1,8 +1,9 @@
 import React from 'react'
-import { render } from 'react-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../actions'
+
+import Loading from '../components/loading'
 
 import './style.scss'
 
@@ -11,12 +12,20 @@ class Root extends React.Component {
     super(props)
   }
   render(){
-  	let {name} = this.props.state.name
+  	let {name,data,loading} = this.props.state.name
+    let loadCom = '', id = ''
+    if (loading) {
+      loadCom = <Loading />
+    }
+    if (data) {
+      id = data.id
+    }
     return (
       <div className="infor">
       	<input placeholder="输入姓名" ref={(c) => this.nameInput = c}/>
       	<button onClick={this.handleClick.bind(this)}>确认</button>
-      	<div>{name}</div>
+        {loadCom}
+        <div>{id}</div>
       </div>
     )
   }

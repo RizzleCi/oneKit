@@ -1,0 +1,17 @@
+.loading {
+	width: 0;
+	height: 0;
+	margin-top: 20px;
+	border: 10px solid #6dacbf;
+	animation: load 1s infinite
+}
+@keyframes load {
+	from {
+		border-radius: 0;
+		transform: rotate(0);
+	} 
+	to{
+		border-radius: 10px;
+		transform: rotate(180deg);
+	}
+}
