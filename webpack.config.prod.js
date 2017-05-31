@@ -18,7 +18,7 @@ module.exports = {
         template: path.resolve(__dirname, 'index.tmpl'),
         inject: true,
         hash: false,
-        filename: '../index.html',
+        filename: 'index.html',
         minify: false,
         favicon: false,
     }),
@@ -34,19 +34,29 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: extractSass.extract({
+            use: [{
+                loader: "css-loader"
+            }, {
+                loader: "sass-loader"
+            }],
+            fallback: "style-loader"
+        })
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        use: 'css-loader',
+        use: ExtractTextPlugin.extract({
+          use:'css-loader'
+        })
       },
       {
         test: /\.js$/,
-        loaders: [ 'babel' ],
-        exclude: /node_modules/,
+        loaders: [ 'babel-loader' ],
+        exclude: /(node_modules|quagga\.js)/,
         include: __dirname
       },
     ]
