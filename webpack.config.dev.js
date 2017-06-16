@@ -18,7 +18,7 @@ module.exports = {
       allChunks: true,
     }),
     new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'index.tmpl'),
+        template: path.resolve(__dirname, './src/index.tmpl'),
         inject: true,
         hash: false,
         filename: '../index.html',
